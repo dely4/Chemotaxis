@@ -1,16 +1,21 @@
 //declare bacteria variables here
 ArrayList<Bacteria> colony = new ArrayList<Bacteria>();   
+PImage venom;
+
 void setup(){
+	venom = loadImage("Venom Logo.png");
 	size(1000,1000);
-	background(255);
-	for(int i = 0; i < 100; i++){
+	background(0);
+	for(int i = 0; i < 1000; i++){
 		Bacteria cell = new Bacteria(250,250);
 		colony.add(cell);
 	}   
  //initialize bacteria variables here   
 }   
 void draw(){
-	background((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));    
+	fill(255);
+	rect(-1, -1, 1001, 1001);
+	image(venom, 0, 0, 1000, 1000);    
 	for(int i = 0; i < colony.size(); i++){
 		Bacteria temp = colony.get(i);
 		temp.show();
@@ -26,12 +31,21 @@ class Bacteria{
 	}
 
 	void move(){
-		x_position+=((int)(((mouseX - x_position)*Math.random())));
-		y_position+=((int)(((mouseY - y_position)*Math.random())));
+		if(x_position<mouseX+20){
+			x_position+= ((int)(Math.random()*20-((int)(Math.random()*2))));
+		}else{
+			x_position+= ((int)(Math.random()*-20-((int)(Math.random()*2))));
+		}
+		if(y_position<mouseY+20){
+			y_position+= ((int)(Math.random()*20-((int)(Math.random()*2))));
+		}else{
+			y_position+= ((int)(Math.random()*-20-((int)(Math.random()*2))));
+		}
 	}
 
 	void show(){
-		ellipse(x_position,y_position,10,10);
+		fill(0);
+		ellipse(x_position,y_position,1,1);
 	}
 
 }    
